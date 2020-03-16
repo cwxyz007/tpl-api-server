@@ -1,0 +1,36 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+  redis:
+    image: redis
+    restart: always
+    volumes:
+      - ./temp/redis:/data
+    ports:
+      - 8902:6379
+
+  mysql:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      # default username: root
+      MYSQL_DATABASE: test
+      MYSQL_ROOT_PASSWORD: admin
+    volumes:
+      - ./temp/mysql:/var/lib/mysql
+    ports:
+      - 8901:3306
+
+  adminer:
+    image: adminer
+    ports:
+      - 8980:8080
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - 8981:8081
