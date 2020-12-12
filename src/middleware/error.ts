@@ -1,6 +1,6 @@
 import { Middleware } from 'koa'
-import { ResError } from '@/validator/validator'
-import { ResponseJson } from '@/controller/utils'
+import { ResError } from '../validator'
+import { ResponseJson } from '../controller/utils'
 
 export const errorCatch: Middleware = async (ctx, next) => {
   try {

@@ -1,0 +1,15 @@
+temp
+node_modules
+.vscode
+__tests__
+
+.editorconfig
+.eslintrc.json
+.gitignore
+.pretterrc
+docker-compoes.yml
+jest.config.js
+LICENSE
+nodemon.json
+README.md
+

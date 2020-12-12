@@ -82,3 +82,5 @@ typings/
 temp
 
 .DS_Store
+
+dist

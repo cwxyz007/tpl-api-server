@@ -2,16 +2,29 @@
 version: '3.1'
 
 services:
+  app:
+    container_name: app
+    build: .
+    ports:
+      - 9555:9555
+    depends_on:
+      - redis
+      - mysql
+
   redis:
     image: redis
+    container_name: redis
     restart: always
     volumes:
       - ./temp/redis:/data
     ports:
       - 8902:6379
+    expose:
+      - 6379
 
   mysql:
     image: mysql
+    container_name: mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
@@ -22,6 +35,8 @@ services:
       - ./temp/mysql:/var/lib/mysql
     ports:
       - 8901:3306
+    expose:
+      - 3306
 
   adminer:
     image: adminer

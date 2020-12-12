@@ -1,6 +1,6 @@
 import KoaRouter from 'koa-router'
-import { useController } from '@/decorator'
-import { controllers } from '@/controller'
+import { useController } from './decorator'
+import { controllers } from './controller'
 
 export const router = new KoaRouter({ prefix: '/api' })
 

@@ -1,5 +1,5 @@
 import { createLogger, format, transports } from 'winston'
-import configs from '@/config'
+import configs from '../config'
 
 const { combine, timestamp, json, colorize } = format
 

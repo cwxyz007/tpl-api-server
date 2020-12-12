@@ -1,6 +1,6 @@
 import { IMiddleware } from 'koa-router'
-import { decodeToken } from '@/controller/utils'
-import { UserModel } from '@/database'
+import { decodeToken } from '../controller/utils'
+import { UserModel } from '../database'
 
 export const isAuth: IMiddleware = async (ctx, next) => {
   const token = ctx.request.header.authorization

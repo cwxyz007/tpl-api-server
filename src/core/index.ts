@@ -1,11 +1,11 @@
 import Koa from 'koa'
 import cors from '@koa/cors'
 import bodyParser from 'koa-bodyparser'
-import configs from '@/config'
+import configs from '../config'
 import { koaLogger, errorCatch } from '../middleware'
-import { logger } from '@/utils'
-import { connectDatabase } from '@/database'
-import { router } from '@/router'
+import { logger } from '../utils'
+import { connectDatabase } from '../database'
+import { router } from '../router'
 
 export class Application {
   app: Koa

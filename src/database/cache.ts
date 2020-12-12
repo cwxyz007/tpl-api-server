@@ -1,6 +1,6 @@
 import { promisify } from 'util'
 import { createClient } from 'redis'
-import configs from '@/config'
+import configs from '../config'
 
 const client = createClient(configs.cacheDB)
 

@@ -1,10 +1,10 @@
 import * as jwt from 'jsonwebtoken'
-import { Controller, Post } from '@/decorator'
+import { Controller, Post } from '../decorator'
 import { ResponseJson } from './utils'
-import { UserModel } from '@/database'
-import { crypto } from '@/utils'
-import configs from '@/config'
-import { validator, ErrorCode } from '@/validator'
+import { UserModel } from '../database'
+import { crypto } from '../utils'
+import configs from '../config'
+import { validator, ErrorCode } from '../validator'
 import { BasicMiddleware } from './typedef'
 
 @Controller('/user')

@@ -4,11 +4,13 @@
   "author": "Fantasy <jie844067636@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "start:prod": "node",
     "start": "yarn run dev",
     "dev": "nodemon",
     "lint": "eslint src/**/*.ts __tests__/**/*.ts",
     "lint:fix": "eslint src/**/*.ts __tests__/**/*.ts --fix",
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc -p tsconfig.build.json"
   },
   "husky": {
     "hooks": {

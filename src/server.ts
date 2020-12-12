@@ -7,7 +7,7 @@ const app = new Application()
 app
   .start(configs.app.port)
   .then(() => {
-    logger.info('server started: http://localhost:9555/api')
+    logger.info(`server started: http://localhost:${configs.app.port}/api`)
   })
   .catch((err) => {
     logger.error(err)

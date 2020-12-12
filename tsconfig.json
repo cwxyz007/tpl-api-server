@@ -8,10 +8,7 @@
     "strict": true,
     "target": "es2017",
     "baseUrl": ".",
-    "outDir": "'./release/",
-    "paths": {
-      "@/*": ["src/*"]
-    }
+    "outDir": "dist"
   },
   "include": ["src", "__tests__"],
   "exclude": ["node_modules"]

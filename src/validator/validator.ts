@@ -1,5 +1,5 @@
 import { ErrorCode } from './ErrorCode'
-import configs from '@/config'
+import configs from '../config'
 import Joi from '@hapi/joi'
 
 export class ResError extends Error {

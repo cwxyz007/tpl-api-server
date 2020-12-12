@@ -1,5 +1,5 @@
 import { getConnection, Connection, EntityManager } from 'typeorm'
-import { logger } from '@/utils'
+import { logger } from '../utils'
 
 export function isDatabaseModel(target: any) {
   return target && target.__isModel__
