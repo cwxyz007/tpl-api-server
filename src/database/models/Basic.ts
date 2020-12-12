@@ -4,11 +4,11 @@ export abstract class BasicModel extends BaseEntity {
   static readonly __isModel__ = true
 
   @PrimaryGeneratedColumn('uuid')
-  id: string
+  id!: string
 
   @CreateDateColumn({ select: false })
-  createAt: number
+  createAt!: number
 
   @UpdateDateColumn({ select: false })
-  updateAt: number
+  updateAt!: number
 }

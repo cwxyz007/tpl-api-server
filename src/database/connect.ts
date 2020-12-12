@@ -5,7 +5,7 @@ import { isDatabaseModel } from './utils'
 
 const allEntities = Object.values(models).filter((m) => isDatabaseModel(m))
 
-export async function connectPostgres() {
+export async function connectDatabase() {
   await createConnection({
     ...configs.database,
     entities: allEntities,

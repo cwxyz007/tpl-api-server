@@ -6,7 +6,7 @@ const client = createClient(configs.cacheDB)
 
 export const cache = {
   async get(key: string) {
-    const val = promisify(client.get).call(client, key)
+    const val = await promisify(client.get).call(client, key)
     return JSON.parse(val)
   },
   async set(key: string, value: any, duration = 24 * 60 * 60) {

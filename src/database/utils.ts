@@ -5,7 +5,10 @@ export function isDatabaseModel(target: any) {
   return target && target.__isModel__
 }
 
-export async function transaction<T>(cb: (manager: EntityManager) => Promise<T>, conn?: Connection): Promise<T> {
+export async function transaction<T>(
+  cb: (manager: EntityManager) => Promise<T>,
+  conn?: Connection
+): Promise<T | undefined> {
   const connection = conn || getConnection()
   const queryRunner = connection.createQueryRunner()
   let err = null

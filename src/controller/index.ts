@@ -1,3 +1,3 @@
-import { AccountController } from './AccountController'
+import { UserController } from './UserController'
 
-export const controllers = [new AccountController()]
+export const controllers = [new UserController()]

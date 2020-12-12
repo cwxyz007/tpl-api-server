@@ -16,7 +16,7 @@ interface ValidateSchema {
   code: ErrorCode
 }
 
-const schemas = {
+const schemas: Record<string, ValidateSchema> = {
   password: {
     schema: Joi.string().alphanum().min(8).max(16),
     code: ErrorCode.invalidPassword

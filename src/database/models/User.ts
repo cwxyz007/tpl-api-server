@@ -4,11 +4,11 @@ import { Entity, Column } from 'typeorm'
 @Entity('user')
 export class UserModel extends BasicModel {
   @Column({ unique: true })
-  username: string
+  username!: string
 
   @Column({ select: false })
-  password: string
+  password!: string
 
   @Column({ default: false })
-  vip: number
+  vip!: number
 }

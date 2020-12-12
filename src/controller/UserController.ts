@@ -5,12 +5,12 @@ import { UserModel } from '@/database'
 import { crypto } from '@/utils'
 import configs from '@/config'
 import { validator, ErrorCode } from '@/validator'
-import { IMiddleware } from 'koa-router'
+import { BasicMiddleware } from './typedef'
 
-@Controller('/account')
-export class AccountController {
+@Controller('/user')
+export class UserController {
   @Post()
-  register: IMiddleware = async (ctx) => {
+  register: BasicMiddleware = async (ctx) => {
     const { username, password, registerCode } = ctx.request.body
 
     validator.password(password)
@@ -40,7 +40,7 @@ export class AccountController {
   }
 
   @Post()
-  login: IMiddleware = async (ctx) => {
+  login: BasicMiddleware = async (ctx) => {
     const { username, password } = ctx.request.body
 
     validator.password(password)
@@ -68,7 +68,7 @@ export class AccountController {
   }
 
   @Post()
-  refreshToken: IMiddleware = async (ctx) => {
+  refreshToken: BasicMiddleware = async (ctx) => {
     const { accessToken, refreshToken } = ctx.request.body
 
     if (!accessToken) {

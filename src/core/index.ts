@@ -4,7 +4,7 @@ import bodyParser from 'koa-bodyparser'
 import configs from '@/config'
 import { koaLogger, errorCatch } from '../middleware'
 import { logger } from '@/utils'
-import { connectPostgres } from '@/database'
+import { connectDatabase } from '@/database'
 import { router } from '@/router'
 
 export class Application {
@@ -31,7 +31,7 @@ export class Application {
   }
 
   async start(port: number) {
-    await connectPostgres()
+    await connectDatabase()
 
     this.app.listen(port)
   }

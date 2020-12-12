@@ -30,7 +30,8 @@ export function Route(
   pathOrMiddleware?: string | IMiddleware,
   ...middlewares: IMiddleware[]
 ): PropertyDecorator {
-  return function(target: any, key: string): void {
+  // @ts-ignore
+  return function (target: any, key: string): void {
     let routes: IDecoratedRoute[] = Reflect.getMetadata(MetaData.routes, target)
 
     if (!routes) {
@@ -93,7 +94,7 @@ export function Delete(pathOrMiddleware?: string | IMiddleware, ...middlewares: 
 }
 
 export function Controller(prefix: string = '', ...middlewares: IMiddleware[]): ClassDecorator {
-  return function(target) {
+  return function (target) {
     const router = new Router({
       prefix
     })
