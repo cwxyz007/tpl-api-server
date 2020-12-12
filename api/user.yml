@@ -1,0 +1,105 @@
+openapi: 3.0.0
+
+info:
+  description: |
+    描述示例
+
+  version: 1.0.0
+  title: API Server
+
+servers:
+  - url: http://api-server.io/api
+    description: API 服务
+
+tags:
+  - name: user
+    description: 用户相关 API
+
+paths:
+  /user/login:
+    post:
+      tags:
+        - user
+      summary: 登录
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+
+      responses:
+        200:
+          description: 登录成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                  refreshToken:
+                    type: string
+
+  /user/register:
+    post:
+      tags:
+        - user
+      summary: 注册
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                registerCode:
+                  type: string
+                  format: uuid
+                  description: 注册码
+
+      responses:
+        200:
+          description: 注册成功
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /user/refreshToken:
+    post:
+      tags:
+        - user
+      summary: 更新 Token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accessToken:
+                  type: string
+                refreshToken:
+                  type: string
+      responses:
+        200:
+          description: 更新成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                  refreshToken:
+                    type: string

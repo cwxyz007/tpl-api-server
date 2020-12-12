@@ -1,3 +1,6 @@
 {
-    "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/schemas/v3.0/schema.yaml": ["**/api/*.yml"]
+  }
 }
