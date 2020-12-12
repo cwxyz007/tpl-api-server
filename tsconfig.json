@@ -7,7 +7,6 @@
     "esModuleInterop": true,
     "strict": true,
     "target": "es2017",
-    "baseUrl": ".",
     "outDir": "dist"
   },
   "include": ["src", "__tests__"],
