@@ -93,7 +93,7 @@ export function Delete(pathOrMiddleware?: string | IMiddleware, ...middlewares: 
   return Route(RequestMethod.Delete, pathOrMiddleware, ...middlewares)
 }
 
-export function Controller(prefix: string = '', ...middlewares: IMiddleware[]): ClassDecorator {
+export function Controller(prefix = '', ...middlewares: IMiddleware[]): ClassDecorator {
   return function (target) {
     const router = new Router({
       prefix

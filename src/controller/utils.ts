@@ -3,9 +3,7 @@ import jwt from 'jsonwebtoken'
 import configs from '@/config'
 import { TokenContent } from './typedef'
 
-export interface IResponseOption {}
-
-export function ResponseJson(data: object = {}) {
+export function ResponseJson(data: Record<string, unknown> = {}) {
   return {
     code: ErrorCode.success,
     ...data

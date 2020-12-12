@@ -39,15 +39,15 @@ const schemas: Record<string, ValidateSchema> = {
 
 type Schemas = typeof schemas
 
-type Validators<T extends Object> = {
-  [K in keyof T]: (value: any) => void
+type Validators<T extends unknown> = {
+  [K in keyof T]: (value: unknown) => void
 }
 
-export const validator: Validators<Schemas> = {} as any
+export const validator: Validators<Schemas> = {}
 
 for (const key in schemas) {
   const opt: ValidateSchema = schemas[key]
-  validator[key] = (value: any) => {
+  validator[key] = (value: unknown) => {
     const result = opt.schema.validate(value)
 
     const err = result.error || result.errors
