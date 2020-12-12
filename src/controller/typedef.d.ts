@@ -2,7 +2,7 @@ import { IMiddleware } from 'koa-router'
 
 export interface TokenContent {
   /**
-   * wechat id
+   * user id
    */
   id: string
 }

@@ -1,7 +1,8 @@
-temp
-node_modules
-.vscode
 __tests__
+.vscode
+api
+node_modules
+temp
 
 .editorconfig
 .eslintrc.json

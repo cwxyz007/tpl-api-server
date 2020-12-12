@@ -1,5 +1,5 @@
 import * as jwt from 'jsonwebtoken'
-import { Controller, Post } from '../decorator'
+import { Controller, Post } from '../router'
 import { ResponseJson } from './utils'
 import { UserModel } from '../database'
 import { crypto } from '../utils'
