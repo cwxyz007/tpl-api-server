@@ -1,7 +1,7 @@
 import * as jwt from 'jsonwebtoken'
 import { Controller, Get, Post } from '../router'
 import { UserModel } from '../database'
-import { crypto } from '../utils'
+import { compare, crypto } from '../utils'
 import configs from '../config'
 import { validator, ErrorCode } from '../validator'
 import { AuthMiddleware, BasicMiddleware } from './typedef'
@@ -57,7 +57,7 @@ export class UserController {
     const user = new UserModel()
     user.username = username
     user.nickName = nickName
-    user.password = crypto(password, username)
+    user.password = await crypto(password)
 
     await user.save()
   }
@@ -69,14 +69,17 @@ export class UserController {
     validator.password(password)
     validator.username(username)
 
-    const user = await UserModel.findOne({
-      where: {
-        username,
-        password: crypto(password, username)
+    const user = await UserModel.findOne(
+      {},
+      {
+        where: {
+          username
+        },
+        select: ['id', 'password']
       }
-    })
+    )
 
-    if (user) {
+    if (user && (await compare(password, user.password))) {
       ctx.body = {
         ...user,
         accessToken: jwt.sign({ id: user.id }, configs.SECRET, {

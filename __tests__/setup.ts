@@ -4,9 +4,24 @@ import configs from '../src/config'
 function createNewAxios() {
   const url = `http://127.0.0.1:${configs.app.port}/api`
 
-  const axios = Axios.create({ baseURL: url })
+  const axiosInstance = Axios.create({ baseURL: url })
 
-  return axios
+  return axiosInstance
+}
+
+export async function createAuthAxios() {
+  const axiosInstance = createNewAxios()
+
+  const { data } = await axiosInstance.post('/user/login', {
+    username: 'testid123',
+    password: '123456789'
+  })
+
+  axiosInstance.defaults.headers = {
+    Authorization: `Bearer ${data.accessToken}`
+  }
+
+  return axiosInstance
 }
 
 export const axios = createNewAxios()

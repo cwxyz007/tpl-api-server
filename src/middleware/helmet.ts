@@ -11,7 +11,10 @@ export function koaHelmet(opt?: any): Middleware {
   const hp = promisify(helmet(opt))
 
   return async (ctx, next) => {
+    // @ts-ignore
+    ctx.req.secure = ctx.request.secure
     await hp(ctx.req, ctx.res)
-    next()
+
+    return next()
   }
 }

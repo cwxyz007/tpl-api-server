@@ -1,11 +1,11 @@
-import { ErrorCode } from './ErrorCode'
+import { ErrorCode, ErrorData } from './ErrorCode'
 import configs from '../config'
 import Joi from '@hapi/joi'
 
 export class ResError extends Error {
-  code: number
+  code: ErrorData
 
-  constructor(msg?: string, code: number = ErrorCode.unknown) {
+  constructor(msg?: string, code: ErrorData = ErrorCode.unknown) {
     super(msg)
     this.code = code
   }
@@ -13,7 +13,7 @@ export class ResError extends Error {
 
 interface ValidateSchema {
   schema: Joi.Schema
-  code: ErrorCode
+  code: ErrorData
 }
 
 const schemas: Record<string, ValidateSchema> = {

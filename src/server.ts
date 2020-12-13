@@ -2,7 +2,7 @@ import Koa from 'koa'
 import cors from '@koa/cors'
 import bodyParser from 'koa-bodyparser'
 import configs from './config'
-import { koaLogger, errorCatch, koaHelmet } from './middleware'
+import { koaLogger, koaHelmet } from './middleware'
 import { logger } from './utils'
 import { connect } from './database'
 import { router, routerResponse } from './router'
@@ -18,19 +18,19 @@ export class Application {
   }
 
   private init() {
+    this.app.use(koaLogger(logger))
+
     this.app.use(koaHelmet())
 
-    this.app.use(koaLogger(logger))
     if (configs.isDev) {
       this.app.use(cors())
     }
 
     this.app.use(bodyParser())
-    this.app.use(errorCatch)
+    this.app.use(routerResponse())
 
     this.app.use(router.routes())
     this.app.use(router.allowedMethods())
-    this.app.use(routerResponse())
   }
 
   async start(port: number) {

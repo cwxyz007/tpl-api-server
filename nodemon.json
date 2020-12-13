@@ -5,6 +5,6 @@
   },
   "ignore": [".git", "node_modules/**/node_modules"],
   "ext": "ts,js",
-  "exec": "ts-node -r tsconfig-paths/register src/server.ts",
+  "exec": "ts-node src/server.ts",
   "delay": 300
 }

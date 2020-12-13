@@ -9,6 +9,6 @@
     "target": "es2017",
     "outDir": "dist"
   },
-  "include": ["src", "__tests__"],
+  "include": ["src", "__tests__", "jest.setup.js"],
   "exclude": ["node_modules"]
 }
