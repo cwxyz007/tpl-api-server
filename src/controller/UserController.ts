@@ -1,11 +1,11 @@
-import * as jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 import { Controller, Get, Post } from '../router'
 import { UserModel } from '../database'
 import { compare, crypto } from '../utils'
 import configs from '../config'
 import { validator, ErrorCode } from '../validator'
-import { AuthMiddleware, BasicMiddleware } from './typedef'
-import { decodeToken } from './utils'
+import { AuthMiddleware, BasicMiddleware, TokenContent } from './typedef'
+import { decodeToken, genToken } from './utils'
 
 export const isAuth: AuthMiddleware = async (ctx, next) => {
   const token = ctx.request.header.authorization
@@ -82,12 +82,7 @@ export class UserController {
     if (user && (await compare(password, user.password))) {
       ctx.body = {
         ...user,
-        accessToken: jwt.sign({ id: user.id }, configs.SECRET, {
-          expiresIn: '2h'
-        }),
-        refreshToken: jwt.sign({ id: user.id }, configs.SECRET, {
-          expiresIn: '1 day'
-        })
+        ...genToken({ id: user.id })
       }
     } else {
       ctx.body = { code: ErrorCode.loginFailed }
@@ -110,16 +105,9 @@ export class UserController {
       }
     } catch (error) {
       try {
-        const decode: any = jwt.verify(refreshToken, configs.SECRET)
+        const decode: TokenContent = jwt.verify(refreshToken, configs.SECRET) as any
 
-        ctx.body = {
-          accessToken: jwt.sign({ id: decode.id }, configs.SECRET, {
-            expiresIn: '20s'
-          }),
-          refreshToken: jwt.sign({ id: decode.id }, configs.SECRET, {
-            expiresIn: '1 day'
-          })
-        }
+        ctx.body = genToken({ id: decode.id })
       } catch (error) {
         ctx.body = { code: ErrorCode.invalidToken }
       }

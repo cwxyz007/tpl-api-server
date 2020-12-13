@@ -5,10 +5,10 @@ import { TokenContent } from './typedef'
 export function genToken(data: TokenContent) {
   return {
     accessToken: jwt.sign(data, configs.SECRET, {
-      expiresIn: '2h'
+      expiresIn: '1d'
     }),
     refreshToken: jwt.sign(data, configs.SECRET, {
-      expiresIn: '1 day'
+      expiresIn: '7d'
     })
   }
 }
