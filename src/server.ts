@@ -6,6 +6,7 @@ import { koaLogger, errorCatch } from './middleware'
 import { logger } from './utils'
 import { connect } from './database'
 import { router } from './router'
+import { koaHelmet } from './middleware/helmet'
 
 export class Application {
   app: Koa
@@ -18,6 +19,8 @@ export class Application {
   }
 
   private init() {
+    this.app.use(koaHelmet())
+
     this.app.use(koaLogger(logger))
     if (configs.debug) {
       this.app.use(cors())
