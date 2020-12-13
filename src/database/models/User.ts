@@ -6,6 +6,9 @@ export class UserModel extends BasicModel {
   @Column({ unique: true })
   username!: string
 
+  @Column({ length: 16 })
+  nickName!: string
+
   @Column({ select: false })
   password!: string
 

@@ -1,20 +1,43 @@
 import * as jwt from 'jsonwebtoken'
-import { Controller, Post } from '../router'
-import { ResponseJson } from './utils'
+import { Controller, Get, Post } from '../router'
 import { UserModel } from '../database'
 import { crypto } from '../utils'
 import configs from '../config'
 import { validator, ErrorCode } from '../validator'
-import { BasicMiddleware } from './typedef'
+import { AuthMiddleware, BasicMiddleware } from './typedef'
+import { decodeToken } from './utils'
+
+export const isAuth: AuthMiddleware = async (ctx, next) => {
+  const token = ctx.request.header.authorization
+  if (token) {
+    try {
+      const content = decodeToken(token.slice('Bearer '.length))
+
+      const user = await UserModel.findOne({ id: content.id })
+
+      if (user) {
+        ctx.state.user = user
+      } else {
+        ctx.status = 401
+      }
+    } catch (error) {
+      ctx.status = 401
+    }
+
+    await next()
+  } else {
+    ctx.status = 401
+  }
+}
 
 @Controller('/user')
 export class UserController {
   @Post()
   register: BasicMiddleware = async (ctx) => {
-    const { username, password, registerCode } = ctx.request.body
+    const { username, password, registerCode, nickName } = ctx.request.body
 
-    validator.password(password)
     validator.username(username)
+    validator.password(password)
     validator.registerCode(registerCode)
 
     const registered = await UserModel.findOne({
@@ -24,19 +47,19 @@ export class UserController {
     })
 
     if (registered) {
-      ctx.body = ResponseJson({
+      ctx.body = {
         code: ErrorCode.duplicateUsername
-      })
+      }
 
       return
     }
 
     const user = new UserModel()
     user.username = username
+    user.nickName = nickName
     user.password = crypto(password, username)
-    await user.save()
 
-    ctx.body = ResponseJson()
+    await user.save()
   }
 
   @Post()
@@ -54,16 +77,17 @@ export class UserController {
     })
 
     if (user) {
-      ctx.body = ResponseJson({
+      ctx.body = {
+        ...user,
         accessToken: jwt.sign({ id: user.id }, configs.SECRET, {
           expiresIn: '2h'
         }),
         refreshToken: jwt.sign({ id: user.id }, configs.SECRET, {
           expiresIn: '1 day'
         })
-      })
+      }
     } else {
-      ctx.body = ResponseJson({ code: ErrorCode.loginFailed })
+      ctx.body = { code: ErrorCode.loginFailed }
     }
   }
 
@@ -72,30 +96,38 @@ export class UserController {
     const { accessToken, refreshToken } = ctx.request.body
 
     if (!accessToken) {
-      ctx.body = ResponseJson({ code: ErrorCode.invalidToken })
+      ctx.body = { code: ErrorCode.invalidToken }
     }
 
     try {
       jwt.verify(accessToken, configs.SECRET)
-      ctx.body = ResponseJson({
+      ctx.body = {
         accessToken,
         refreshToken
-      })
+      }
     } catch (error) {
       try {
         const decode: any = jwt.verify(refreshToken, configs.SECRET)
 
-        ctx.body = ResponseJson({
+        ctx.body = {
           accessToken: jwt.sign({ id: decode.id }, configs.SECRET, {
             expiresIn: '20s'
           }),
           refreshToken: jwt.sign({ id: decode.id }, configs.SECRET, {
             expiresIn: '1 day'
           })
-        })
+        }
       } catch (error) {
-        ctx.body = ResponseJson({ code: ErrorCode.invalidToken })
+        ctx.body = { code: ErrorCode.invalidToken }
       }
     }
+  }
+}
+
+@Controller('/user', isAuth)
+export class UserAuthController {
+  @Get()
+  info: AuthMiddleware = async (ctx) => {
+    ctx.body = ctx.state.user
   }
 }

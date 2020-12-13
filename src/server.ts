@@ -2,11 +2,10 @@ import Koa from 'koa'
 import cors from '@koa/cors'
 import bodyParser from 'koa-bodyparser'
 import configs from './config'
-import { koaLogger, errorCatch } from './middleware'
+import { koaLogger, errorCatch, koaHelmet } from './middleware'
 import { logger } from './utils'
 import { connect } from './database'
-import { router } from './router'
-import { koaHelmet } from './middleware/helmet'
+import { router, routerResponse } from './router'
 
 export class Application {
   app: Koa
@@ -31,6 +30,7 @@ export class Application {
 
     this.app.use(router.routes())
     this.app.use(router.allowedMethods())
+    this.app.use(routerResponse())
   }
 
   async start(port: number) {

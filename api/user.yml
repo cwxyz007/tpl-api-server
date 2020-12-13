@@ -41,6 +41,15 @@ paths:
               schema:
                 type: object
                 properties:
+                  id:
+                    type: string
+                    format: uuid
+                  username:
+                    type: string
+                  nickName:
+                    type: string
+                  vip:
+                    type: number
                   accessToken:
                     type: string
                   refreshToken:
@@ -61,6 +70,8 @@ paths:
                 username:
                   type: string
                 password:
+                  type: string
+                nickName:
                   type: string
                 registerCode:
                   type: string
