@@ -6,7 +6,7 @@ services:
     container_name: app
     build: .
     ports:
-      - 9555:9555
+      - 9505:9555
     depends_on:
       - redis
       - mysql
