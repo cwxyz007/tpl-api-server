@@ -21,7 +21,7 @@ export class Application {
     this.app.use(koaHelmet())
 
     this.app.use(koaLogger(logger))
-    if (configs.debug) {
+    if (configs.isDev) {
       this.app.use(cors())
     }
 

@@ -9,7 +9,7 @@ export const logger = createLogger({
   format: combine(colorize(), timestamp(), json())
 })
 
-if (configs.debug) {
+if (configs.isDev) {
   logger.add(
     new transports.Console({
       format: format.simple()
