@@ -5,6 +5,11 @@ export function routerResponse(): Middleware {
   return async function (ctx, next) {
     try {
       await next()
+
+      if (ctx.status !== 200) {
+        return
+      }
+
       const data = ctx.body || {}
 
       ctx.body = {
