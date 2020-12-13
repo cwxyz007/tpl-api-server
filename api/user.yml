@@ -114,3 +114,34 @@ paths:
                     type: string
                   refreshToken:
                     type: string
+
+  /user/info:
+    get:
+      tags:
+        - user
+      summary: 获取用户信息
+
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+
+      responses:
+        200:
+          description: 用户信息
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  username:
+                    type: string
+                  nickName:
+                    type: string
+                  vip:
+                    type: number
