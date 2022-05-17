@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:13-alpine
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=testdb
+    ports:
+      - 5432:5432
+    volumes:
+      - ./temp/database:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    links:
+      - postgres
+    ports:
+      - 8080:8080
