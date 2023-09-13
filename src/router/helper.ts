@@ -6,6 +6,8 @@ interface IListener<T extends ZodSchema> {
   (query: z.infer<T>, ctx: Parameters<Middleware>['0']): any
 }
 
+const DEFAULT_STATUS = 404
+
 export function defGet<T extends ZodSchema>(listener: IListener<T>): Middleware
 export function defGet<T extends ZodSchema>(querySchema: T, listener: IListener<T>): Middleware
 export function defGet<T extends ZodSchema>(
@@ -17,7 +19,7 @@ export function defGet<T extends ZodSchema>(
       const params = ctx.request.query
 
       const resp = await schemaOrListener(params, ctx)
-      if (ctx.status === 200) ctx.body = resp
+      if (ctx.status === DEFAULT_STATUS) ctx.body = resp
     }
 
     return g
@@ -28,7 +30,7 @@ export function defGet<T extends ZodSchema>(
     validate(schemaOrListener, params)
 
     const resp = await listener?.(params, ctx)
-    if (ctx.status === 200) ctx.body = resp
+    if (ctx.status === DEFAULT_STATUS) ctx.body = resp
   }
 
   return g
@@ -45,7 +47,7 @@ export function defPost<T extends ZodSchema>(
       const params = ctx.request.body
 
       const resp = await schemaOrListener(params, ctx)
-      if (ctx.status === 200) ctx.body = resp
+      if (ctx.status === DEFAULT_STATUS) ctx.body = resp
     }
 
     return g
@@ -56,7 +58,7 @@ export function defPost<T extends ZodSchema>(
     validate(schemaOrListener, params)
 
     const resp = await listener?.(params, ctx)
-    if (ctx.status === 200) ctx.body = resp
+    if (ctx.status === DEFAULT_STATUS) ctx.body = resp
   }
 
   return g
