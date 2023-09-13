@@ -1,5 +1,3 @@
-import { Middleware } from "koa";
+import { defGet } from '@/router'
 
-export const get: Middleware = (ctx) => {
-  ctx.body = 'Cool!'
-}
+export const get = defGet(() => 'Cool!')

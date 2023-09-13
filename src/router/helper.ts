@@ -1,0 +1,59 @@
+import { Middleware } from 'koa'
+import { ZodSchema, z } from 'zod'
+import { validate } from '../validator'
+
+interface IListener<T extends ZodSchema> {
+  (query: z.infer<T>, ctx: Parameters<Middleware>['0']): any
+}
+
+export function defGet<T extends ZodSchema>(listener: IListener<T>): Middleware
+export function defGet<T extends ZodSchema>(querySchema: T, listener: IListener<T>): Middleware
+export function defGet<T extends ZodSchema>(
+  schemaOrListener: T | IListener<T>,
+  listener?: IListener<T>
+): Middleware {
+  if (typeof schemaOrListener === 'function') {
+    const g: Middleware = async (ctx) => {
+      const params = ctx.request.query
+
+      ctx.body = await schemaOrListener(params, ctx)
+    }
+
+    return g
+  }
+
+  const g: Middleware = async (ctx) => {
+    const params = ctx.request.query
+    validate(schemaOrListener, params)
+
+    ctx.body = await listener?.(params, ctx)
+  }
+
+  return g
+}
+
+export function defPost<T extends ZodSchema>(listener: IListener<T>): Middleware
+export function defPost<T extends ZodSchema>(bodySchema: T, listener: IListener<T>): Middleware
+export function defPost<T extends ZodSchema>(
+  schemaOrListener: T | IListener<T>,
+  listener?: IListener<T>
+) {
+  if (typeof schemaOrListener === 'function') {
+    const g: Middleware = async (ctx) => {
+      const params = ctx.request.body
+
+      ctx.body = await schemaOrListener(params, ctx)
+    }
+
+    return g
+  }
+
+  const g: Middleware = async (ctx) => {
+    const params = ctx.request.body
+    validate(schemaOrListener, params)
+
+    ctx.body = await listener?.(params, ctx)
+  }
+
+  return g
+}

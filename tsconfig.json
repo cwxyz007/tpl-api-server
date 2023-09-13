@@ -1,11 +1,17 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "strict": true,
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "target": "es2016",
-    "module": "commonjs"
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "paths": {
+      "@prisma/client": [".prisma/client"],
+      "@/*": ["src/*"]
+    }
   },
   "exclude": ["node_modules"]
 }
