@@ -16,7 +16,8 @@ export function defGet<T extends ZodSchema>(
     const g: Middleware = async (ctx) => {
       const params = ctx.request.query
 
-      ctx.body = await schemaOrListener(params, ctx)
+      const resp = await schemaOrListener(params, ctx)
+      if (ctx.status === 200) ctx.body = resp
     }
 
     return g
@@ -26,7 +27,8 @@ export function defGet<T extends ZodSchema>(
     const params = ctx.request.query
     validate(schemaOrListener, params)
 
-    ctx.body = await listener?.(params, ctx)
+    const resp = await listener?.(params, ctx)
+    if (ctx.status === 200) ctx.body = resp
   }
 
   return g
@@ -42,7 +44,8 @@ export function defPost<T extends ZodSchema>(
     const g: Middleware = async (ctx) => {
       const params = ctx.request.body
 
-      ctx.body = await schemaOrListener(params, ctx)
+      const resp = await schemaOrListener(params, ctx)
+      if (ctx.status === 200) ctx.body = resp
     }
 
     return g
@@ -52,7 +55,8 @@ export function defPost<T extends ZodSchema>(
     const params = ctx.request.body
     validate(schemaOrListener, params)
 
-    ctx.body = await listener?.(params, ctx)
+    const resp = await listener?.(params, ctx)
+    if (ctx.status === 200) ctx.body = resp
   }
 
   return g
