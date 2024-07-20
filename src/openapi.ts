@@ -19,8 +19,8 @@ export async function registerOpenapiRoutes(app: Hono) {
 async function getOpenapiConfig() {
   if (IS_DEV_MODE) {
     // Use a variable to avoid tsup to compile scripts/*.ts
-    const makeItAnyWorkAtDevMode = '../scripts/utils'
-    const { generateOpenapiConfig } = await import(makeItAnyWorkAtDevMode)
+    const makeItOnlyWorksAtDevMode = '../scripts/utils'
+    const { generateOpenapiConfig } = await import(makeItOnlyWorksAtDevMode)
 
     console.log('generating openapi config...')
     const result = generateOpenapiConfig()
