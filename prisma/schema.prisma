@@ -1,25 +1,20 @@
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../.prisma/client"
 }
 
-model Profile {
-  id     Int     @id @default(autoincrement())
-  name   String?
-  bio    String?
-  user   User    @relation(fields: [userId], references: [id])
-  userId Int     @unique
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
 }
 
-model User {
-  id       Int      @id @default(autoincrement())
-  username String   @unique
-  password String
-  email    String?  @unique
-  profile  Profile?
+model Cache {
+  id    Int     @id @default(autoincrement())
+  key   String  @unique
+  value String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

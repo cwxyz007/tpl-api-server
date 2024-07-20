@@ -1,20 +1,13 @@
-import Koa from 'koa'
-import koaBody from 'koa-body'
-import { initRouter } from './router/generator'
-import { validator } from './validator'
+import 'dotenv/config'
+import { app } from './app'
+import { serve } from '@hono/node-server'
 
-async function start() {
-  const app = new Koa()
-  const router = await initRouter()
-
-  const port = 3000
-
-  app
-    .use(koaBody())
-    .use(validator())
-    .use(router.routes())
-    .use(router.allowedMethods())
-    .listen(port, () => console.log(`http://127.0.0.1:${port}`))
-}
-
-start()
+serve(
+  {
+    port: 3560,
+    fetch: app.fetch
+  },
+  (info) => {
+    console.log('service serve at:', `http://localhost:${info.port}`)
+  }
+)

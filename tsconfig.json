@@ -1,17 +1,17 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "strict": true,
-    "experimentalDecorators": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
     "paths": {
-      "@prisma/client": [".prisma/client"],
-      "@/*": ["src/*"]
-    }
+      "@/*": ["./src/*"]
+    },
+    "outDir": "dist"
   },
-  "exclude": ["node_modules"]
+  "include": ["src", "scripts"]
 }
