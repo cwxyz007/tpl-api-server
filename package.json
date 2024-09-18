@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.14.11",
-    "openapi-ts-define": "^0.2.4",
+    "openapi-ts-define": "^0.4.0",
     "tsup": "^8.1.2",
     "tsx": "^4.16.2",
     "typescript": "^5.5.3"

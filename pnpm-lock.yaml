@@ -31,8 +31,8 @@ importers:
         specifier: ^20.14.11
         version: 20.14.11
       openapi-ts-define:
-        specifier: ^0.2.4
-        version: 0.2.4
+        specifier: ^0.4.0
+        version: 0.4.0
       tsup:
         specifier: ^8.1.2
         version: 8.1.2(tsx@4.16.2)(typescript@5.5.3)(yaml@2.4.5)
@@ -767,8 +767,8 @@ packages:
     resolution: {integrity: sha512-kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==}
     engines: {node: '>=6'}
 
-  openapi-ts-define@0.2.4:
-    resolution: {integrity: sha512-T9gdunU2gAgewTbhX+2B6AeAynEfVwYuBU1V5Y60VY+ILhLqyYQ9H7OuwnPEyZPy2QhSmrzRiXqCRxz4kSM86w==}
+  openapi-ts-define@0.4.0:
+    resolution: {integrity: sha512-sSCNWBeJseWtt/YxslfBijkul89WYSU7MxjavEC13RgrZFoZ5ybVVyW3T6ixo0QQlLmpEbQQZegXHvaWOh8PGg==}
     engines: {node: '>= 18'}
 
   package-json-from-dist@1.0.0:
@@ -1549,7 +1549,7 @@ snapshots:
     dependencies:
       mimic-fn: 2.1.0
 
-  openapi-ts-define@0.2.4:
+  openapi-ts-define@0.4.0:
     dependencies:
       '@0x-jerry/utils': 2.4.2
       fast-glob: 3.3.2
