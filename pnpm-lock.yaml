@@ -12,8 +12,8 @@ importers:
         specifier: ^1.12.0
         version: 1.12.0
       '@hono/swagger-ui':
-        specifier: ^0.4.0
-        version: 0.4.0(hono@4.5.0)
+        specifier: ^0.5.0
+        version: 0.5.0(hono@4.5.0)
       '@prisma/client':
         specifier: 5.19.1
         version: 5.19.1(prisma@5.17.0)
@@ -334,8 +334,8 @@ packages:
     resolution: {integrity: sha512-e6oHjNiErRxsZRZBmc2KucuvY3btlO/XPncIpP2X75bRdTilF9GLjm3NHvKKunpJbbJJj31/FoPTksTf8djAVw==}
     engines: {node: '>=18.14.1'}
 
-  '@hono/swagger-ui@0.4.0':
-    resolution: {integrity: sha512-8lF+dexzgV2HRM1R/gf49E5djroq4jVMYMSwLkSF9pT0I6sYhuqirFDCRFrBtbbLCBsKzw6f2MF5rS+WY3d7Nw==}
+  '@hono/swagger-ui@0.5.0':
+    resolution: {integrity: sha512-MWYYSv9kC8IwFBLZdwgZZMT9zUq2C/4/ekuyEYOkHEgUMqu+FG3eebtBZ4ofMh60xYRxRR2BgQGoNIILys/PFg==}
     peerDependencies:
       hono: '*'
 
@@ -1132,7 +1132,7 @@ snapshots:
 
   '@hono/node-server@1.12.0': {}
 
-  '@hono/swagger-ui@0.4.0(hono@4.5.0)':
+  '@hono/swagger-ui@0.5.0(hono@4.5.0)':
     dependencies:
       hono: 4.5.0
 
